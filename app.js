@@ -1,14 +1,17 @@
 require("dotenv").config("./.env");
 const express = require("express");
-const appRoutes = require("../routes/index.routes.js");
-
-const PORT = process.env.PORT;
+const api = require("./routes/index.routes");
+const PORT = process.env.PORT || 3000;
 const app = express();
+const db = require("./config/db");
+app.use(express.json());
 
-//Import Routes here
 // routes from index.routes.js
 
-app.use("/", appRoutes);
+app.use("/", api);
+app.get("/", (req, res) => {
+  res.send("This is the landing page ");
+});
 
 //Listening the server
 
