@@ -8,6 +8,7 @@ const app = express();
 
 //routes
 const api = require("./routes/index.routes");
+const { errorHandler } = require("./Middleware/errorHandler");
 const db = require("./config/db");
 const PORT = process.env.PORT || 3000;
 
@@ -16,34 +17,24 @@ const passport = require("passport");
 app.use(express.json());
 app.use(express.static("public/"));
 app.use([passport.initialize()]);
-
-//validation of data
-const { ValidationError } = require("express-validation");
 const { path } = require("./models/userSchema");
-app.use((err, req, res, next) => {
-  if (err instanceof ValidationError) {
-    const details = err.details.map((detail) => ({
-      message: detail.message,
-      path: detail.path,
-      type: detail.type,
-    }));
-
-    return res.status(err.statusCode).json({
-      status: "error",
-      message: err.message || "Validation-Error",
-      details: err.details,
-    });
-  }
-  next(err); // Pass other errors to the next middleware
-});
 
 // routes from index.routes.js
 app.use("/", api);
 app.get("/", (req, res) => {
   res.send("This is the landing page ");
 });
-//Listening the server
 
+// Not Found Error..
+app.use((req, res) => {
+  res.status(404).json({ message: "This is the landing page " });
+});
+
+//error Handler Middleware
+app.use(errorHandler);
+
+//Listening the server
 app.listen(PORT, (req, res) => {
+  console.clear();
   console.log(`The server is running at http://localhost:${PORT}`);
 });
