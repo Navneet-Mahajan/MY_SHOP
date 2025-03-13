@@ -26,8 +26,7 @@ async function registerUser(req, res) {
       email: req.body.email,
       password: req.body.password,
       profileImage: req.file.path,
-      role: req.body.role,
-      createdAt: moment().format(),
+      role: req.body.role
     });
     res.send("User Registered Successfully");
   } catch (error) {
