@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String },
   profileImage: { type: String },
   role: { type: String },
-  createdAt: { type: Date ,default : moment().format() },
+  createdAt: { type: Date, default: moment().format() },
   UpdatedAt: { type: Date, default: null },
   isDeleted: { type: Boolean, default: false },
   deleteAt: { type: Date, default: null },
