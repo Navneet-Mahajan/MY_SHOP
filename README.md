@@ -81,7 +81,7 @@ npm start
 ## Future Enhancements
 
 - Implement inventory management to track product stock levels.
-- Add email-based password reset functionality.
+- Integrate Secure OTP functionality 
 - Develop order processing and payment integration.
 - Build an EJS-based frontend for seamless user interaction.
 - Optimize API performance and implement caching strategies.
